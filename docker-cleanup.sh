@@ -1,18 +1,11 @@
-#!/bin/bash
+# ~/.bash_aliases
 
-# Stop/remove all containers
-docker stop $(docker ps -a -q)
-docker rm -f $(docker ps -a -q)
-
-# Remove containers using more than one filter
-docker rm -f $(docker ps -a -f status=exited -f status=created -q)
-
-# Remove dangling volumes
-docker volume rm -f $(docker volume ls -f dangling=true -q)
-
-# Remove Dangling images
-docker rmi -f $(docker images -f dangling=true -q)
-
-# Remove all images
-docker rmi -f $(docker images -a -q)
-
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker volume rm $(docker volume ls -qf dangling=true)
+docker volume ls -qf dangling=true | xargs -r docker volume rm
+docker rmi $(docker images -q -f dangling=true)
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
+docker rmi $(docker images -q)
+docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
