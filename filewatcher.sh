@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PID="-1"
-FILE_EXT="$1"
+FILE_EXT=$1
 SCRIPT_WILL_BE_EXECUTED="$2"
 
 mainAction() {
