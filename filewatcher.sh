@@ -2,12 +2,12 @@
 
 PID="-1"
 FILE_EXT=$1
-SCRIPT_WILL_BE_EXECUTED="$2"
+ARGS=("$@") 
 
 mainAction() {
   [[ $PID != "-1" ]] && kill -9 $PID 2>/dev/null;
-  $SCRIPT_WILL_BE_EXECUTED &
-  echo $SCRIPT_WILL_BE_EXECUTED;
+  SCRIPTS_AFTER_SECOND=("${ARGS[@]:2}")
+  echo ${SCRIPTS_AFTER_SECOND[0]}
   PID=$!;
 }
 
