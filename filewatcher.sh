@@ -6,7 +6,7 @@ SCRIPT_WILL_BE_EXECUTED="$2"
 
 mainAction() {
   [[ $PID != "-1" ]] && kill -9 $PID 2>/dev/null;
-  echo $SCRIPT_WILL_BE_EXECUTED | bash &
+  $SCRIPT_WILL_BE_EXECUTED &
   echo $SCRIPT_WILL_BE_EXECUTED;
   PID=$!;
 }
