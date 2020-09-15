@@ -7,7 +7,10 @@ ARGS=("$@")
 mainAction() {
   [[ $PID != "-1" ]] && kill -9 $PID 2>/dev/null;
   SCRIPTS_AFTER_SECOND=("${ARGS[@]:2}")
-  echo ${SCRIPTS_AFTER_SECOND[0]}
+  for script in ${SCRIPTS_AFTER_SECOND[*]}; do
+    echo $script
+  done
+  
   PID=$!;
 }
 
